@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <!--
+    Basic Page Needs
+    ==================================================
+    -->
+   <meta charset="utf-8">
+   <title> Cursos Data</title>
+   <!--
+    Mobile Specific Metas
+    ==================================================
+    -->
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+   <!--
+    CSS
+    ==================================================
+    -->
+   <!-- Bootstrap-->
+   <link rel="stylesheet" href="css/bootstrap.min.css">
+   <!-- Animation-->
+   <link rel="stylesheet" href="css/animate.css">
+   <!-- Morris CSS -->
+   <link rel="stylesheet" href="css/morris.css">
+   <!-- FontAwesome-->
+   <link rel="stylesheet" href="css/font-awesome.min.css">
+   <!-- Icon font-->
+   <link rel="stylesheet" href="css/icon-font.css">
+   <!-- Owl Carousel-->
+   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+   
+   <link rel="stylesheet" href="css/owl.carousel.min.css">
+   <!-- Owl Theme -->
+   <link rel="stylesheet" href="css/owl.theme.default.min.css">
+   <!-- Colorbox-->
+   <link rel="stylesheet" href="css/colorbox.css">
+   <!-- Template styles-->
+   <link rel="stylesheet" href="css/style.css">
+   <!-- Responsive styles-->
+   <link rel="stylesheet" href="css/responsive.css">
+   <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file.-->
+   <!--if lt IE 9
+    script(src='js/html5shiv.js')
+    script(src='js/respond.min.js')
+    -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+      .carousel-inner h2,
+      .carousel-inner h3,
+      .carousel-inner p {
+          color: #000 !important;
+      }
+      .btn {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 99, 71, 0.3);
+  }
+
+  .parallax-section {
+    background-image: url('images/slider/bj2.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    padding: 150px 0;
+    color: white;
+    text-align: center;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    color: white;
+  }
+
+  </style>
+  <style>
+  #chat-bubble {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #c62828; /* Rojo fuerte */
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 28px;
+    line-height: 60px;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: background 0.3s ease;
+  }
+
+  #chat-bubble:hover {
+    background-color: #b71c1c;
+  }
+
+  #chat-box {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    width: 300px;
+    max-height: 400px;
+    background-color: white;
+    border: 1px solid #e57373;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+  }
+
+  #chat-box.hidden {
+    display: none;
+  }
+
+  .chat-header {
+    background-color: #d32f2f; /* Rojo */
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chat-body {
+    padding: 10px;
+    overflow-y: auto;
+    height: 200px;
+    font-size: 14px;
+    flex-grow: 1;
+  }
+
+  .chat-input {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+
+  .chat-input input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e57373;
+    border-radius: 5px;
+  }
+
+  .user-msg, .bot-msg {
+    margin: 6px 0;
+    padding: 8px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+  }
+
+  .user-msg {
+    background: #ef5350; /* Rojo claro */
+    color: white;
+    align-self: flex-end;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .bot-msg {
+    background: #fce4ec; /* Rosa muy claro */
+    color: #880e4f;
+    align-self: flex-start;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .close-chat {
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+</style>
+</head>
+
+<body>
+
+   <div class="body-inner">
+
+      <div class="site-top-2">
+         <header class="header nav-down" id="header-2">
+            <div class="container">
+               <div class="row">
+                  <div class="logo-area clearfix">
+                     <div class="logo col-lg-3 col-md-12">
+                        <a href="index.html">
+                           <img src="images/Cursos.png" alt="">
+                        </a>
+                     </div>
+                     <!-- logo end-->
+                     <div class="col-lg-9 col-md-12 pull-right">
+                        <ul class="top-info unstyled">
+                           <li><span class="info-icon"><i class="icon icon-phone3"></i></span>
+                              <div class="info-wrapper">
+                                 <p class="info-title">Respuesta inmediata</p>
+                                 <p class="info-subtitle">(+52) 844 256 7560</p>
+                              </div>
+                           </li>
+                           <li><span class="info-icon"><i class="icon icon-envelope"></i></span>
+                              <div class="info-wrapper">
+                                 <p class="info-title">Contactanos</p>
+                                 <p class="info-subtitle">josiman280@gmail.com</p>
+                              </div>
+                           </li>
+                           
+                        </ul>
+                     </div>
+                     <!-- Col End-->
+                  </div>
+                  <!-- Logo Area End-->
+               </div>
+            </div>
+            <!-- Container end-->
+            <div class="site-nav-inner site-navigation navigation navdown">
+               <div class="container">
+                  <nav class="navbar navbar-expand-lg ">
+                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"><i class="icon icon-menu"></i></span></button>
+                     <!-- End of Navbar toggler-->
+                     <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
+                        <ul class="navbar-nav">
+                           <li class="nav-item dropdown">
+                                 <a href="index.html">Inicio</a>
+                           </li>
+                           
+                           
+                           <!-- li end-->
+                           <li class="nav-item dropdown">
+                                 <a href="about.html">Sobre nosotros</a>
+                           </li>
+                           <!-- li end-->
+                        
+                           <li class="nav-item dropdown">
+                                 <a href="service.html">Servicios</a>
+                           </li>
+                           <!-- li end-->
+                           <li class="nav-item dropdown">
+                                 <a href="faq.html">Ayuda</a>
+                           </li>
+                           <!-- li end-->
+                           <li class="nav-item dropdown">
+                                 <a href="index-2.html">Mapa del sitio</a>
+                           </li>
+                           <!-- li end-->
+                           <li class="nav-item dropdown">
+                                 <a href="contact.php">Contáctanos</a>
+                           </li>
+                        </ul>
+                        <!--Nav ul end-->
+                     </div>
+                     <a href="registro.php" class="top-right-btn btn btn-primary mr-2">Registrarse</a>
+                     <a href="form.php" class="top-right-btn btn btn-primary">Iniciar sesión</a>
+                  </nav>
+                  <!-- Collapse end-->
+
+                  
+                  
+               </div>
+            </div>
+            <!-- Site nav inner end-->
+         </header>
+         <!-- Header end-->
+      </div>
+
+      <style>
+.carousel-item {
+   position: relative;
+   background-size: cover;
+   background-position: center;
+   height: 100vh; 
+}
+
+.carousel-item::before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   backdrop-filter: blur(5px); 
+   background: rgba(0, 0, 0, 0.3); 
+   z-index: 1;
+}
+
+.carousel-item > .container {
+   position: relative;
+   z-index: 2;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Clases reutilizables */
+.fade-in-up {
+  animation: fadeInUp 1s ease-out both;
+}
+
+.zoom-in {
+  animation: zoomIn 0.8s ease-in-out both;
+}
+
+/* Agrega un pequeño delay si quieres escalonar animaciones */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+</style>
+
+<div class="carousel slide" id="main-slide" data-ride="carousel">
+   <!-- Indicators-->
+   <ol class="carousel-indicators visible-lg visible-md">
+      <li class="active" data-target="#main-slide" data-slide-to="0"></li>
+      <li data-target="#main-slide" data-slide-to="1"></li>
+      <li data-target="#main-slide" data-slide-to="2"></li>
+   </ol>
+
+   <!-- Carousel inner-->
+   <div class="carousel-inner">
+      <div class="carousel-item active zoom-in" style="background-image:url(images/curso1.jpg);">
+         <div class="container">
+            <div class="slider-content text-left">
+               <div class="col-md-12">
+                  <h2 class="slide-title title-light fade-in-up delay-1">Cursos para páginas web</h2>
+                  <h3 class="slide-sub-title fade-in-up delay-2">Javascript, HTML5, CSS, PHP y más...</h3>
+                  <p class="slider-description lead fade-in-up delay-3">Descubre el arte de la creación web y lleva tus ideas al mundo digital.<br/>Explora el diseño interactivo y aprende a cautivar a tus usuarios desde la primera visita.</p>
+                  <p><a class="slider btn btn-primary" href="service.html">Mirar Cursos</a></p>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="carousel-item zoom-in" style="background-image:url(images/slider/bj2.jpg);">
+         <div class="container">
+            <div class="slider-content text-center">
+               <div class="col-md-12">
+                  <h2 class="slide-title title-light">Inteligencia artificial</h2>
+                  <h3 class="slide-sub-title">ChatGPT</h3>
+                  <p class="slider-description lead">Descubre el poder transformador de la inteligencia artificial y desata nuevas posibilidades en la era digital.</p>
+                  <p><a class="slider btn btn-primary" href="service.html">Mirar Cursos</a></p>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="carousel-item zoom-in" style="background-image:url(images/slider/b3.jpg);">
+         <div class="container">
+            <div class="slider-content text-right">
+               <div class="col-md-12">
+                  <h2 class="slide-title title-light">Bases de datos</h2>
+                  <h3 class="slide-sub-title">MySQL y Oracle</h3>
+                  <p class="slider-description lead">Explora el mundo de las bases de datos y descubre cómo organizar la información de manera eficiente.</p>
+                  <p><a class="slider btn btn-primary" href="service.html">Mirar Cursos</a></p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <!-- Controllers -->
+   <a class="left carousel-control carousel-control-prev" href="#main-slide" data-slide="prev">
+      <span><i class="fa fa-angle-left"></i></span>
+   </a>
+   <a class="right carousel-control carousel-control-next" href="#main-slide" data-slide="next">
+      <span><i class="fa fa-angle-right"></i></span>
+   </a>
+</div>
+
+      <section id="ts-features-light" class="ts-features-light">
+         <div class="container">
+            <div class="row feature-light-row">
+               <div class="col-md-4 text-center" class="glass-card" data-aos="zoom-in">
+                  <div class="ts-feature-box">
+                     <div class="ts-feature-info">
+                        <div class="feature-img">
+                           <img src="images/icon/service1.png" alt="" style="width: 200px; height: 200px;" />
+                        </div>
+                        <h3 class="ts-feature-title">Cursos de paginas web</h3>
+                        <p>Desarrolla tu presencia en línea con un curso que te guiará desde la planificación hasta el lanzamiento de tu propia página web.</p>
+                        <a class="slider btn btn-primary" href="service.html">Ver más cursos</a>
+                     </div>
+                  </div>
+                  <!-- feature box-1 end-->
+               </div>
+               <!-- col-1 end-->
+               <div class="col-md-4 text-center border-left" class="glass-card" data-aos="zoom-in">
+                  <div class="ts-feature-box">
+                     <div class="ts-feature-info">
+                        <div class="feature-img">
+                           <img src="images/icon/service2.jpg" alt="" style="width: 200px; height: 200px;" />
+                        </div>
+                        <h3 class="ts-feature-title">Cursos de inteligencia artificial</h3>
+                        <p>Construye tu camino hacia el conocimiento avanzado en inteligencia artificial y enfrentar los desafíos del mañana.</p>
+                        <a class="slider btn btn-primary" href="service.html">Ver más cursos</a>
+                     </div>
+                  </div>
+                  <!-- feature box-2 end-->
+               </div>
+               <!-- col-2 end-->
+               <div class="col-md-4 text-center border-left" class="glass-card" data-aos="zoom-in">
+                  <div class="ts-feature-box">
+                     <div class="ts-feature-info">
+                        <div class="feature-img">
+                           <img src="images/icon/service3.jpg" alt="" style="width: 200px; height: 200px;" />
+                        </div>
+                        <!--<i class="icon icon-clock3"></i>-->
+                        <h3 class="ts-feature-title">Cursos de base de datos</h3>
+                        <p>Aprende a implementar y gestionar bases de datos en entornos empresariales, mejorando la eficiencia y toma de decisiones.</p>
+                        <a class="slider btn btn-primary" href="service.html">Ver más cursos</a>
+                     </div>
+                  </div>
+                  <!-- feature box-2 end-->
+               </div>
+               <!-- col-3 end-->
+            </div>
+         </div>
+      </section>
+      <!-- ts-feature light end -->
+
+      <section  class="ts-service-area service-area-pattern" id="ts-service-area" >
+        <div class="service-area-bg">
+         <div class="container">
+            <div class="row text-center">
+               <div class="col-md-12">
+                  <h2 class="section-title" data-aos="fade-up"><span>No busques mas</span>Porque Cursos Data?</h2>
+               </div>
+            </div>
+            <!-- Title row end-->
+            <div class="row">
+               <div class="col-lg-4 col-md-12">
+                  <div class="ts-service-wrapper">
+                    <div class="ts-service-box" data-aos="fade-right">
+                     <div class="ts-service-box-img">
+                        <img src="images/icon/why-1.png" alt="" />
+                     </div>
+                     <div class="ts-service-box-info">
+                        <h3 class="service-box-title">Buen Performance del 99%</h3>
+                        <p>Adéntrate en el fascinante universo de las bases de datos relacionales y no relacionales, tambien en tiempo real.</p>
+                    </div>
+                  </div><!-- Service 1 end -->
+                  <div class="gap-15"></div>
+                  <div class="ts-service-box" data-aos="fade-right">
+                     <div class="ts-service-box-img">
+                        <img src="images/icon/why-2.png " alt="" />
+                     </div>
+                     <div class="ts-service-box-info">
+                        <h3 class="service-box-title">Tus cursos siempre disponibles y seguros</h3>
+                        <p>Desarrolla habilidades prácticas en administración de bases de datos para garantizar la integridad y seguridad de la información.</p>
+                    </div>
+                  </div><!-- Service 2 end -->
+                  <div class="gap-15"></div>
+                  <div class="ts-service-box" data-aos="fade-right">
+                     <div class="ts-service-box-img">
+                        <img src="images/icon/why-4.png " alt="" />
+                     </div>
+                     <div class="ts-service-box-info">
+                        <h3 class="service-box-title">Contamos con lugar fisicos y en linea</h3>
+                        <p>Descubre las últimas tendencias en bases de datos y cómo aplicarlas para mantener tu conocimiento actualizado. </p>
+                    </div>
+                  </div><!-- Service 3 end -->
+                  </div>
+               </div><!-- Col end -->
+               <div class="col-lg-4 col-md-12">
+                  <span class="service-img"><img class="img-fluid" src="images/services/servicecenter-removebg-preview.png" alt=""  style="width: 800px; height: 450px;" /></span>
+               </div>
+
+               <div class="col-lg-4 col-md-12">
+                  <div class="ts-service-wrapper ml-lg-auto">
+                    <div class="ts-service-box" data-aos="fade-right">
+                     <div class="ts-service-box-img ">
+                        <img src="images/icon/why-3.png" alt="" />
+                     </div>
+                     <div class="ts-service-box-info">
+                        <h3 class="service-box-title">Videollamadas en tiempo real disponibles</h3>
+                        <p>Soluciones inteligentes con nuestro curso de inteligencia artificial, donde la teoría se encuentra con la práctica de manera innovadora.</p>
+                    </div>
+                  </div><!-- Service 4 end -->
+                  <div class="gap-15"></div>
+                  <div class="ts-service-box" data-aos="fade-right">
+                     <div class="ts-service-box-img">
+                        <img src="images/icon/why-5.png" alt="" />
+                     </div>
+                     <div class="ts-service-box-info">
+                        <h3 class="service-box-title">Encontraras un local cerca de ti</h3>
+                        <p>Aprende a programar el futuro con nuestros cursos de inteligencia artificial y la lógica se fusionan para crear soluciones asombrosas.</p>
+                    </div>
+                  </div><!-- Service 5 end -->
+                  <div class="gap-15"></div>
+                  <div class="ts-service-box" data-aos="fade-right">
+                     <div class="ts-service-box-img">
+                        <img src="images/icon/why-6.png" alt="" />
+                     </div>
+                     <div class="ts-service-box-info">
+                        <h3 class="service-box-title">Diferentes medios para llegar hasta ti</h3>
+                        <p>Explora el fascinante mundo de la usabilidad web y crea interfaces intuitivas que conecten con tus usuarios.</p>
+                    </div>
+                  </div><!-- Service 6 end -->
+                  </div>
+               </div><!-- Col end -->
+            </div><!-- Content row end -->
+            <!-- Content row end-->
+         </div>
+         <!-- Container end-->
+        </div>
+      </section>
+      <!-- Service Section end-->
+      
+      
+         <!-- Footer Main-->
+         <div class="copyright">
+            <div class="container">
+               <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                     <div class="copyright-info"><span>Copyright © 2025 a theme by Cursos Data</span></div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <div class="footer-social text-right">
+                        <ul>
+                           <li><a href="https://facebook.com"><i class="fa fa-facebook"></i></a></li>
+                           <li><a href="https://twitter.com"><i class="fa fa-twitter"></i></a></li>
+                           <li><a href="https://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
+                           <li><a href="https://github.com"><i class="fa fa-github"></i></a></li>
+                           <li><a href="https://instagram.com"><i class="fa fa-instagram"></i></a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <!-- Row end-->
+            </div>
+            <!-- Container end-->
+         </div>
+         <!-- Copyright end-->
+      </footer>
+      <!-- Footer end-->
+
+      <div class="back-to-top affix" id="back-to-top" data-spy="affix" data-offset-top="10">
+         <button class="btn btn-primary" title="Back to Top"><i class="fa fa-angle-double-up"></i>
+            <!-- icon end-->
+         </button>
+         <!-- button end-->
+      </div>
+      <!-- End Back to Top-->
+
+      <!--
+      Javascript Files
+      ==================================================
+      -->
+      <!-- initialize jQuery Library-->
+      <script type="text/javascript" src="js/jquery.js"></script>
+       
+       
+      <!-- Bootstrap jQuery-->
+      <script type="text/javascript" src="js/bootstrap.min.js"></script>
+      <!-- Owl Carousel-->
+      <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+      <!-- Counter-->
+      <script type="text/javascript" src="js/jquery.counterup.min.js"></script>
+      <!-- Waypoints-->
+      <script type="text/javascript" src="js/waypoints.min.js"></script>
+      <!-- Color box-->
+      <script type="text/javascript" src="js/jquery.colorbox.js"></script>
+       
+        
+      <!-- Template custom-->
+      <script type="text/javascript" src="js/custom.js"></script>
+   </div>
+   <!--Body Inner end-->
+<div id="chat-bubble" onclick="toggleChat()">
+  <i class="fa fa-comments"></i>
+</div>
+
+<div id="chat-box" class="hidden">
+  <div class="chat-header">
+    <strong>¿En qué puedo ayudarte?</strong>
+    <span class="close-chat" onclick="toggleChat()">&times;</span>
+  </div>
+  <div class="chat-body" id="chat-messages">
+    <div class="bot-msg">¡Hola! ¿En qué puedo ayudarte hoy? 😊</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="user-input" placeholder="Escribe tu mensaje..." onkeydown="handleInput(event)">
+  </div>
+</div>
+<script>
+  function toggleChat() {
+    var chatBox = document.getElementById('chat-box');
+    chatBox.classList.toggle('hidden');
+  }
+
+  function handleInput(e) {
+    if (e.key === 'Enter') {
+      const input = document.getElementById('user-input');
+      const msg = input.value.trim();
+      if (msg !== '') {
+        addMessage('user', msg);
+        input.value = '';
+        setTimeout(() => {
+          addMessage('bot', generateResponse(msg));
+        }, 600); // Simula un poco de "pensar"
+      }
+    }
+  }
+
+  function addMessage(sender, text) {
+    const chat = document.getElementById('chat-messages');
+    const msg = document.createElement('div');
+    msg.className = sender === 'user' ? 'user-msg' : 'bot-msg';
+    msg.innerText = text;
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function generateResponse(input) {
+    input = input.toLowerCase();
+    if (input.includes('cursos') || input.includes('curso')) {
+      return 'Ofrecemos cursos de programación, diseño y más. ¿Cuál te interesa?';
+    } else if (input.includes('contacto') || input.includes('teléfono')) {
+      return 'Puedes contactarnos al (+52) 844 256 7560 o al correo josiman280@gmail.com.';
+    } else if (input.includes('gracias')) {
+      return '¡De nada! 😊';
+    } else {
+      return 'Lo siento, soy un bot básico. Puedes dejar tu consulta y te contactaremos pronto.';
+    }
+  }
+</script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+</script>
+</body>
+
+</html>
