@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once 'db_conexion.php';
+require_once 'seguridad.php';
+soloAdmin();
 
 if (!isset($_SESSION['usuario'])) {
    header("Location: error_sesion.php");
@@ -37,6 +39,7 @@ if (isset($_POST['curso']) && isset($_POST['duracion'])) {
       exit();
         }
 }
+require_once 'seguridad.php';
 ?>
 
 <!DOCTYPE html>
