@@ -19,15 +19,15 @@ if (isset($_POST['login'])) {
         if ($userData && password_verify($clave, $userData['clave'])) {
             $_SESSION['usuario'] = $userData['usuario'];
             $_SESSION['correo'] = $userData['correo'];
-            $_SESSION['nombre'] = $userData['nombre'];
+          
             $_SESSION['curso'] = $userData['curso'];
 
+            // Mostrar mensaje según el tipo de usuario
             if ($userData['usuario'] === 'admin') {
-                header("location: indexadmin.php");
+                $alertMessage = 'mostrarToast("Entrando como administrador", "success"); setTimeout(() => { window.location.href = "indexadmin.php"; }, 1500);';
             } else {
-                header("location: indexusuario.php");
+                $alertMessage = 'mostrarToast("Entrando como usuario", "success"); setTimeout(() => { window.location.href = "indexusuario.php"; }, 1500);';
             }
-            exit();
         } else {
             $alertMessage = 'mostrarToast("Credenciales incorrectas", "error");';
         }
